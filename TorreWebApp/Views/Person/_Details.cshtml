@@ -1,0 +1,138 @@
+﻿@model Web.Domain.Entities.Root
+
+
+<form asp-action='_Detail'
+      id='formPersonDetail'
+      data-ajax-method='POST'
+      data-ajax-update='#formPersonDetail'
+      style="border: thin solid; border-color:darkturquoise;  padding-left:5px ; padding-right:5px; padding-bottom:5px">
+
+    <div id='body-planilla-pantalla' style='margin-bottom: 20px;padding: 4px;'>
+
+        <div id='id-body-create'>
+
+            <div class='row' style="padding-left:30px">
+                <div class='col-md-10'>
+                    <div class='row'>
+                        <div class='col-md-4'>
+                            <div class='form-group'>
+                                <label asp-for='person.name' class='control-label'></label>
+                                <input asp-for='person.name' class='form-control' readonly />
+                            </div>
+                        </div>
+                        <div class='col-md-4'  style="padding-left:5px">
+                            <div class='form-group'>
+                                <label asp-for='person.professionalHeadline' class='control-label'></label>
+                                <input asp-for='person.professionalHeadline' class='form-control' readonly />
+                            </div>
+                        </div>
+
+                        <div class='col-md-1'  style="padding-left:5px">
+                            <div class='form-group'>
+                                <label asp-for='person.showPhone' class='control-label'></label>
+                                <div class='checkbox'>
+                                    <label>
+                                        <input asp-for='person.showPhone' readonly />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-md-1'  style="padding-left:5px">
+                            <div class='form-group'>
+                                <label asp-for='person.hasEmail' class='control-label'></label>
+                                <div class='checkbox'>
+                                    <label>
+                                        <input asp-for='person.hasEmail' readonly />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-md-4' style="padding-left:5px">
+                            <div class='form-group'>
+                                <label class='control-label'>Location</label>
+                                <input asp-for='person.location.name' class='form-control' readonly />
+                            </div>
+                        </div>
+                        <div class='col-md-4' style="padding-left:5px">
+                            <div class='form-group'>
+                                <label class='control-label'>Education</label>
+                                <input asp-for='education.FirstOrDefault().name' class='form-control' readonly />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='col-md-12'>
+                            <div class='form-group'>
+                                <label class='control-label'>Job list</label>
+                                <table class="table-condensed table-striped" data-toggle="table" id="table">
+                                    <col width="300">
+                                    <col width="300">
+                                    <col width="250">
+
+                                    <thead>
+                                        <tr>
+                                            <th data-field="" data-sortable="true">Name</th>
+                                            <th data-field="" data-sortable="true">Organization</th>
+                                            <th data-field="" data-sortable="true">Period</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            @foreach (var item in Model.jobs)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.name)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.organizations.FirstOrDefault().name)
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.fromMonth)/@Html.DisplayFor(modelItem => item.fromYear)&nbsp;to&nbsp; @Html.DisplayFor(modelItem => item.toMonth)/@Html.DisplayFor(modelItem => item.toYear)
+
+                                                    </td>
+
+                                                </tr>
+                                            }}
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class='col-md-2'>
+                    <div class='row'>
+                        <div class='col-md-12'>
+                            <div class='form-group'>
+                                <img class="img" src="@Model.person.picture" width="160" height="160" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <h5>Stats:</h5>
+                        <ul>
+                            <li><p>Education: @Model.stats.education</p></li>
+                            <li><p>Interests: @Model.stats.interests</p></li>
+                            <li><p>Jobs: @Model.stats.jobs</p></li>
+                            <li><p>Strengths: @Model.stats.strengths</p></li>
+                        </ul>
+
+                    </div>
+                </div>
+           </div>
+        </div>
+            </div>
+    <div class='footer' style=" text-align:right">
+        <button type='button' id='cerrar-Detail-Person-btn' class='btn  btn-secondary' style='width:60px' onclick='PersonFunctions.detailCancel()'>Back</button>
+    </div>
+</form>
+
+
+

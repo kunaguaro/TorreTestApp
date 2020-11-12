@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Torre Test</title>
+
+  
+
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/side-modal.css" />
+        <link rel="stylesheet" href="~/css/styleTableNested.css" />
+        <link rel="stylesheet" href="~/css/side-modal.css" />
+        <link href="~/css/count-down-timer.css" rel="stylesheet" />
+        <link href="~/css/metisMenu.min.css" rel="stylesheet" />
+        <link href="~/css/timeline.css" rel="stylesheet" />
+        <link href="~/css/startmin.css" rel="stylesheet" />
+        <link href="~/css/morris.css" rel="stylesheet" />
+        <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="~/css/navbar.css" rel="stylesheet" />
+        <link href="~/select2/css/select2.css" rel="stylesheet" />
+        <link href="~/css/spinkit.css" rel="stylesheet" />
+        <link href="~/css/jquery-ui.css" rel="stylesheet" />
+        <link rel="stylesheet" href="~/css/site.css" />
+
+        <style>
+            .navbar-default {
+                background-color: #3d114f;
+                border-color: #8e44ad;
+            }
+
+                .navbar-default .navbar-brand {
+                    color: #ecf0f1;
+                }
+
+                    .navbar-default .navbar-brand:hover,
+                    .navbar-default .navbar-brand:focus {
+                        color: #ecdbff;
+                    }
+        </style>
+
+ 
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/js/Ajax/jszip.min.js"></script>
+            <script src="~/js/Ajax/vfs_fonts.js"></script>
+            <script src="~/js/site.js"></script>
+            <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/sweetalert/sweetalert2.all.min.js"></script>
+            <script src="~/select2/js/select2.js"></script>
+            <script src="~/js/Jquery/jquery-ui.min.js"></script>
+
+   
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+            </script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+            <script src="~/jqueryui/jquery-ui.js"></script>
+        </environment>
+
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+
+</head>
+
+
+<body style="background: url('/background-images/pattern06.jpg');background-repeat: repeat">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand" style="padding-top:15px">TorreWebApp</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+
+        <input type="hidden" id="UserEmailLogged" name="UserEmailLogged" value="@User.Identity.Name">
+        <div id="menu">
+
+        </div>
+
+
+
+        <div id="general-modal" class="modal fade" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false" style="width:100%!important;height:90%!important">
+            <div class="modal-dialog modal-lg" style="width:50%!important;height:70%!important; border-bottom:none !important;">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
+        @RenderBody()
+
+        <!-- /#page-wrapper -->
+    </div>
+    <partial name="_CookieConsentPartial" />
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+
+        var userM = $("#UserEmailLogged").val();
+     
+    });
+    $('.modal-content').resizable({
+        alsoResize: ".modal-dialog",
+        minHeight: 300,
+        minWidth: 300
+    });
+    $('.modal-dialog').draggable();
+
+</script>

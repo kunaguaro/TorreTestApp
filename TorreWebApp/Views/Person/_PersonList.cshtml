@@ -1,0 +1,99 @@
+﻿@model Web.Domain.Pagination.PagingList<Web.Domain.Entities.ListElement.ListElement.Result>
+
+
+<table class="" data-toggle="table" id="table">
+    <col width="140">
+    <col width="300">
+    <col width="70">
+    <col width="50">
+    <thead>
+        <tr>
+            <th data-field="Name" data-sortable="true">Name</th>
+            <th data-field="professionalHeadline" data-sortable="true">Professional Headline</th>
+            <th data-field="locationName" data-sortable="true">Location</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+@foreach (var item in Model)
+{
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.professionalHeadline)
+
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.locationName)
+
+    </td>
+    <td>
+        <div class="btn-group" style="text-align:right">
+            <a class="btn btn-default  btn-xs" style="width:28px;margin-right:3px" data-toggle="tooltip" title="Details" onclick="PersonFunctions.showEdit('@item.username')"><i class="glyphicon glyphicon-list-alt" style="margin-right:2px"></i> </a>
+        </div>
+    </td>
+</tr>}}
+    </tbody>
+</table>
+<br />
+@if (Model != null)
+{
+
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var totalPageNo = Model.TotalPageNo;
+    var currentPageNo = Model.PageIndex;
+
+
+
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNo="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled" id="previou-tab-register" data-pageNo="@(Model.PageIndex - 1)">
+    Anterior
+</a>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNo="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-default @nextDisabled" id="next-tab-register" data-pageNo="@(Model.PageIndex + 1)">
+                    >
+                    Siguiente
+                </a>
+                                @Html.Hidden("currentPageNo", currentPageNo)
+                                                <span>
+                                                    Pag. Nro : @currentPageNo de @totalPageNo
+                                                </span>
+                                                                 }
+                                                                            else
+                                                                            {
+                                                                @Html.Hidden("currentPageNo", 0)}
+
+
+
+
+
+<script>
+    $("#previou-tab-register").click(function (e) {
+        e.preventDefault();
+        var pageNo = $(this).attr('data-pageNo');
+        PersonFunctions.setPersonFilter(false, pageNo);
+    });
+    $("#next-tab-register").click(function (e) {
+        e.preventDefault();
+        var pageNo = $(this).attr('data-pageNo');
+        PersonFunctions.setPersonFilter(false, pageNo);
+    });
+    $('.order-by-ref').click(function (e) {
+        e.preventDefault();
+        alert('Sign new href executed.');
+    });
+</script>
+<link href="~/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
+<script src="~/bootstrap-table/bootstrap-table.min.js"></script>
